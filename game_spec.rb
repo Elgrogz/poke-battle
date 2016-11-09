@@ -60,7 +60,21 @@ class TestGame < Minitest::Test
     # assert_equal("continue", @game1.win_check)
     @game1.fight
     @game1.fight
-    assert_equal("Manky", @game1.win_check)
+    @game1.win_check
+    assert_equal(1, @game1.pokemon_list.length)
+  end
+
+  def test_win
+    @game1.add_pokemon(@pokemon1)
+    @game1.add_pokemon(@pokemon2)
+    @game1.fight
+    @game1.fight
+    @game1.fight
+    @game1.fight
+    @game1.fight
+    @game1.win_check
+    assert_equal("Jigglypuff", @game1.win)
+
   end
 
 end

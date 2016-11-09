@@ -4,7 +4,7 @@ require('pry-byebug')
 
 class Game
 attr_reader :pokemon_list, :current_player, :winner, :name, :hit_points
-  def initialize()
+  def initialize
     @pokemon_list = []
     @winner = nil
   end
@@ -29,7 +29,8 @@ attr_reader :pokemon_list, :current_player, :winner, :name, :hit_points
 
   def fight
       @pokemon_list[1].hit_points -= 20  
-      return @pokemon_list[1].hit_points
+      puts @pokemon_list[1].hit_points
+      win_check
   end
 
   def heal
@@ -42,21 +43,17 @@ attr_reader :pokemon_list, :current_player, :winner, :name, :hit_points
 
 
   def win_check
-    for pokemon in @pokemon_list
-      if pokemon.hit_points <= 0
-        @winner = pokemon.name
+    for poke in @pokemon_list
+      if poke.hit_points <= 0
+       @pokemon_list.pop
+       win
       end
     end
-    return @winner
   end
 
   def win
-    for pokemon in @pokemon_list
-      if pokemon != loser
-        pokemon = winner
-    end
-
-    puts "#{winner.name} is the winner!"
+    @winner = @pokemon_list[0]
+    puts "#{@winner.name} is the winner!"
     exit
   end
 
@@ -76,7 +73,7 @@ attr_reader :pokemon_list, :current_player, :winner, :name, :hit_points
   end
 end
 
-end
+
 
 
 
